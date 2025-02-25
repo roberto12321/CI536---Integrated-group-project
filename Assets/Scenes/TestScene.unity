@@ -273,7 +273,7 @@ MonoBehaviour:
       Height: 5
     Bottom:
       Radius: 12
-      Height: 0.1
+      Height: 1.5
     SplineCurvature: 0.5
   RecenteringTarget: 2
   HorizontalAxis:
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 113765915}
   cam: {fileID: 1411083509}
-  speed: 6
+  speed: 12
   turnSmoothTime: 0.05
   move: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!143 &113765915
@@ -534,7 +534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f93d69a4b4301a346a0f1415eecb008d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
