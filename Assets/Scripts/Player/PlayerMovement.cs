@@ -53,13 +53,13 @@ public class PlayerMovement : MonoBehaviour
         if (controller.isGrounded)
         {
             velocity = -1f;
-            print("Grounded: " + velocity);
+            //print("Grounded: " + velocity);
 
         }
         else
         {
             velocity += gravity * gravityMultiplier * Time.deltaTime;
-            print("Airborne: " + velocity);
+            //print("Airborne: " + velocity);
 
         }
         return velocity;

@@ -376,6 +376,8 @@ GameObject:
   - component: {fileID: 113765915}
   - component: {fileID: 113765914}
   - component: {fileID: 113765913}
+  - component: {fileID: 113765916}
+  - component: {fileID: 113765918}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -473,6 +475,47 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!95 &113765916
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: bff6cefc9d2a4034b97ff53e76e16f2c, type: 3}
+  m_Controller: {fileID: 9100000, guid: 01c65f742f5c03843aa0bed763fb2d38, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &113765918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c5aa95d62d5e204aa7eff8ddb1b09e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 8761934139001452162, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  block: {fileID: 5098899393317188295, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  dash: {fileID: 3069499282457050551, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  swap: {fileID: -8008440271712646577, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  heal: {fileID: -4913038205513180125, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  ability1: {fileID: -1659599974407356073, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  ability2: {fileID: -7793274223562163506, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &212260519
 GameObject:
   m_ObjectHideFlags: 0
