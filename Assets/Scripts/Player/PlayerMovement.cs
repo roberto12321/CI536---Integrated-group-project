@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
             moveDirection += (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * speed * Time.deltaTime;
             
         }
-        print(moveDirection);
+        //print(moveDirection);
         controller.Move(moveDirection);
         
         
