@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
-
+    public bool canMove;
 
     public float gravity = -9.81f;
     public float gravityMultiplier = 3.0f;
@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = new Vector3(0,0,0);
         moveDirection += new Vector3(0, ApplyGravity(),0);
 
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f && canMove)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);

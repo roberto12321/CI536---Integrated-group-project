@@ -47,7 +47,13 @@ public class PlayerStates : MonoBehaviour
         {
             if (attack.action.WasPressedThisFrame() && currentState != PlayerState.Attack)
             {
-                StateChange(PlayerState.Attack);    
+                StateChange(PlayerState.Attack);
+          
+            }
+            if (block.action.IsPressed() && currentState != PlayerState.Block)
+            {
+                StateChange(PlayerState.Block);
+
             }
         }
         if (currentState == PlayerState.Attack)
@@ -56,7 +62,11 @@ public class PlayerStates : MonoBehaviour
         }
         if (currentState == PlayerState.Block)
         {
+            if (!block.action.IsPressed())
+            {
+                StateChange(PlayerState.Idle);
 
+            }
         }
         if (currentState == PlayerState.Dash)
         {
@@ -137,11 +147,14 @@ public class PlayerStates : MonoBehaviour
         if (enteredState == PlayerState.Attack)
         {
             print("Entered Attack");
+            playerMovement.canMove = false;
             animator.SetInteger("Animation", 1);
         }
         if (enteredState == PlayerState.Block)
         {
             print("Entered Block");
+            playerMovement.canMove = false;
+            animator.SetInteger("Animation", 2);
         }
         if (enteredState == PlayerState.Dash)
         {
@@ -174,10 +187,12 @@ public class PlayerStates : MonoBehaviour
         if (exitedState == PlayerState.Attack)
         {
             print("Exited Attack");
+            playerMovement.canMove = true;
         }
         if (exitedState == PlayerState.Block)
         {
             print("Exited Block");
+            playerMovement.canMove = true;
         }
         if (exitedState == PlayerState.Dash)
         {
