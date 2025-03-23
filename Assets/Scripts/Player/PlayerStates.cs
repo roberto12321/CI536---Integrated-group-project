@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class PlayerStates : MonoBehaviour
 {
     private Animator animator;
     private PlayerMovement playerMovement;
+    private HealthScript healthScript;
+    private HitboxManagerScript hitboxManagerScript;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public int initialState;
@@ -37,6 +42,8 @@ public class PlayerStates : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        healthScript = GetComponent<HealthScript>();
+        hitboxManagerScript = GetComponent<HitboxManagerScript>();
 
     }
 
@@ -148,6 +155,7 @@ public class PlayerStates : MonoBehaviour
         {
             print("Entered Attack");
             playerMovement.canMove = false;
+            hitboxManagerScript.entitiesHit.Clear();
             animator.SetInteger("Animation", 1);
         }
         if (enteredState == PlayerState.Block)
@@ -224,6 +232,7 @@ public class PlayerStates : MonoBehaviour
             StateChange(PlayerState.Idle);
         }
     }
+    
 
 
 }

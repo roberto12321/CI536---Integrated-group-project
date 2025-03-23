@@ -462,6 +462,10 @@ GameObject:
   - component: {fileID: 113765913}
   - component: {fileID: 113765916}
   - component: {fileID: 113765918}
+  - component: {fileID: 113765919}
+  - component: {fileID: 113765921}
+  - component: {fileID: 113765920}
+  - component: {fileID: 113765922}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -553,13 +557,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 3
+  m_Height: 5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.5, z: 0}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!95 &113765916
 Animator:
   serializedVersion: 7
@@ -604,6 +608,83 @@ MonoBehaviour:
   heal: {fileID: -4913038205513180125, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   ability1: {fileID: -1659599974407356073, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   ability2: {fileID: -7793274223562163506, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &113765919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1215efc995fb454cbe0824a128206eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  isAlive: 1
+  maxHealth: 100
+  healthBar: {fileID: 675148062}
+--- !u!54 &113765920
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &113765921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 5, z: 1}
+  m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &113765922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113765911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09bab38d8032da4292c8e4ac2cffa22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entitiesHit: []
 --- !u!1 &167096278
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,9 +926,10 @@ GameObject:
   - component: {fileID: 509726211}
   - component: {fileID: 509726210}
   - component: {fileID: 509726209}
+  - component: {fileID: 509726212}
   m_Layer: 0
-  m_Name: rw
-  m_TagString: Untagged
+  m_Name: Sword
+  m_TagString: EnemyHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -941,6 +1023,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509726207}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &509726212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509726207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9dc1c7b2d30fa4586dd9af908bae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxManagerScript: {fileID: 919030066}
+  enemyTag: PlayerHurtbox
 --- !u!1 &514409168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1318,9 +1414,12 @@ GameObject:
   - component: {fileID: 919030060}
   - component: {fileID: 919030063}
   - component: {fileID: 919030062}
+  - component: {fileID: 919030064}
+  - component: {fileID: 919030065}
+  - component: {fileID: 919030066}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: EnemyHurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1389,7 +1488,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &919030063
 BoxCollider:
@@ -1412,6 +1511,47 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.5, y: 5, z: 0.8}
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &919030064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919030059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1215efc995fb454cbe0824a128206eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  isAlive: 1
+  maxHealth: 100
+  healthBar: {fileID: 167096280}
+--- !u!114 &919030065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919030059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb3b8c591d20f64994e4fc1dee102bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &919030066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919030059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e09bab38d8032da4292c8e4ac2cffa22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entitiesHit: []
 --- !u!1 &1100037757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,9 +2440,10 @@ GameObject:
   - component: {fileID: 2105894643}
   - component: {fileID: 2105894642}
   - component: {fileID: 2105894641}
+  - component: {fileID: 2105894644}
   m_Layer: 0
-  m_Name: rw
-  m_TagString: Untagged
+  m_Name: Sword
+  m_TagString: PlayerHitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2396,6 +2537,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105894639}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2105894644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105894639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9dc1c7b2d30fa4586dd9af908bae44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxManagerScript: {fileID: 113765922}
+  enemyTag: EnemyHurtbox
 --- !u!1 &2111146857
 GameObject:
   m_ObjectHideFlags: 0
