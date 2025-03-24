@@ -10,13 +10,20 @@ public class PlayerStates : MonoBehaviour
     private PlayerMovement playerMovement;
     private HealthScript healthScript;
     private HitboxManagerScript hitboxManagerScript;
-
+    public GameObject player;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     public int initialState;
     [HideInInspector] public PlayerState currentState;
     [HideInInspector] public PlayerState lastState;
+
+    //Combat
+    public bool isBlocking;
+    public bool isPerfectBlocking;
+
+
 
     public InputActionReference attack;
     public InputActionReference block;
@@ -162,6 +169,7 @@ public class PlayerStates : MonoBehaviour
         {
             print("Entered Block");
             playerMovement.canMove = false;
+            isBlocking = true;
             animator.SetInteger("Animation", 2);
         }
         if (enteredState == PlayerState.Dash)
@@ -200,6 +208,7 @@ public class PlayerStates : MonoBehaviour
         if (exitedState == PlayerState.Block)
         {
             print("Exited Block");
+            isBlocking = false;
             playerMovement.canMove = true;
         }
         if (exitedState == PlayerState.Dash)
@@ -231,6 +240,27 @@ public class PlayerStates : MonoBehaviour
         {
             StateChange(PlayerState.Idle);
         }
+    }
+
+    public void TakeDamage(float damageTaken, HitboxType hitboxType, bool facingHitbox)
+    {
+
+        if(hitboxType == HitboxType.standard)
+        {
+            if(isBlocking && facingHitbox)
+            {
+                print("Blocked");
+            }
+            else
+            {
+                var newHealth = healthScript.health - damageTaken;
+                healthScript.SetHealth(newHealth);
+                print("Damage taken");
+            }
+            
+        }
+
+        
     }
     
 

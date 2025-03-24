@@ -4,7 +4,7 @@ using UnityEngine;
 public class HitboxManagerScript : MonoBehaviour
 {
     public List<Collider> entitiesHit = new List<Collider>();
-    
+    public GameObject entity;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

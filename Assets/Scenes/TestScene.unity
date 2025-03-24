@@ -463,8 +463,6 @@ GameObject:
   - component: {fileID: 113765916}
   - component: {fileID: 113765918}
   - component: {fileID: 113765919}
-  - component: {fileID: 113765921}
-  - component: {fileID: 113765920}
   - component: {fileID: 113765922}
   m_Layer: 0
   m_Name: Player
@@ -598,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5aa95d62d5e204aa7eff8ddb1b09e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 113765911}
   initialState: 0
   currentState: 0
   lastState: 0
@@ -624,54 +623,6 @@ MonoBehaviour:
   isAlive: 1
   maxHealth: 100
   healthBar: {fileID: 675148062}
---- !u!54 &113765920
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113765911}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &113765921
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113765911}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 5, z: 1}
-  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &113765922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesHit: []
+  entity: {fileID: 113765911}
 --- !u!1 &167096278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +991,7 @@ MonoBehaviour:
   enemyTag: PlayerHurtbox
   healthScript: {fileID: 0}
   hitboxDamage: 10
+  hitboxType: 0
 --- !u!1 &514409168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,6 +1507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesHit: []
+  entity: {fileID: 919030059}
 --- !u!1 &1100037757
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2509,7 @@ MonoBehaviour:
   enemyTag: EnemyHurtbox
   healthScript: {fileID: 0}
   hitboxDamage: 10
+  hitboxType: 0
 --- !u!1 &2111146857
 GameObject:
   m_ObjectHideFlags: 0
