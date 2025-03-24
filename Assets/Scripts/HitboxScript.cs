@@ -4,6 +4,8 @@ public class HitboxScript : MonoBehaviour
 {
     public HitboxManagerScript hitboxManagerScript;
     public string enemyTag;
+    public HealthScript healthScript;
+    public float hitboxDamage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +22,10 @@ public class HitboxScript : MonoBehaviour
         if (other.gameObject.CompareTag(enemyTag) && !hitboxManagerScript.entitiesHit.Contains(other))
         {
             hitboxManagerScript.entitiesHit.Add(other);
-            print("Balls");
+            healthScript = other.GetComponent<HealthScript>();
+            var newHealth = healthScript.health - hitboxDamage;
+            healthScript.SetHealth(newHealth);
+            print(healthScript.health);
         }
         
     }

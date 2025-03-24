@@ -16,4 +16,8 @@ public class HitboxManagerScript : MonoBehaviour
     {
           
     }
+    public void ClearEntitiesHitArray()
+    {
+        entitiesHit.Clear();
+    }
 }

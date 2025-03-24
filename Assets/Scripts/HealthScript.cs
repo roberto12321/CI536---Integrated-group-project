@@ -21,11 +21,11 @@ public class HealthScript : MonoBehaviour
 
     public void SetHealth(float newHealth)
     {
-        if(newHealth < maxHealth)
+        if(newHealth > maxHealth)
         {
             health = maxHealth;
         }
-        else if(newHealth > maxHealth) 
+        else if(newHealth < 0) 
         {
             health = 0;
         }
