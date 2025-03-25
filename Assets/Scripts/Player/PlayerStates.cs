@@ -11,7 +11,12 @@ public class PlayerStates : MonoBehaviour
     private HealthScript healthScript;
     private HitboxManagerScript hitboxManagerScript;
     public GameObject player;
-    
+    public Transform cam;
+
+    [SerializeField] private AudioClip perfectBlockSound;
+    [SerializeField] private AudioClip blockSound;
+    [SerializeField] private AudioClip playerHurtSound;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -22,7 +27,8 @@ public class PlayerStates : MonoBehaviour
     //Combat
     public bool isBlocking;
     public bool isPerfectBlocking;
-
+    public float perfectBlockTime;
+    private float blockStartTime;
 
 
     public InputActionReference attack;
@@ -76,6 +82,12 @@ public class PlayerStates : MonoBehaviour
         }
         if (currentState == PlayerState.Block)
         {
+            if(Time.time > blockStartTime + perfectBlockTime)
+            {
+                isPerfectBlocking = false;
+            }
+
+
             if (!block.action.IsPressed())
             {
                 StateChange(PlayerState.Idle);
@@ -162,6 +174,7 @@ public class PlayerStates : MonoBehaviour
         {
             print("Entered Attack");
             playerMovement.canMove = false;
+            transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
             hitboxManagerScript.entitiesHit.Clear();
             animator.SetInteger("Animation", 1);
         }
@@ -169,7 +182,10 @@ public class PlayerStates : MonoBehaviour
         {
             print("Entered Block");
             playerMovement.canMove = false;
+            isPerfectBlocking = true;
             isBlocking = true;
+            blockStartTime = Time.time;
+            transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
             animator.SetInteger("Animation", 2);
         }
         if (enteredState == PlayerState.Dash)
@@ -209,6 +225,7 @@ public class PlayerStates : MonoBehaviour
         {
             print("Exited Block");
             isBlocking = false;
+            isPerfectBlocking = false;
             playerMovement.canMove = true;
         }
         if (exitedState == PlayerState.Dash)
@@ -245,24 +262,32 @@ public class PlayerStates : MonoBehaviour
     public void TakeDamage(float damageTaken, HitboxType hitboxType, bool facingHitbox)
     {
 
-        if(hitboxType == HitboxType.standard)
+        if (hitboxType == HitboxType.standard)
         {
-            if(isBlocking && facingHitbox)
+            if (isPerfectBlocking && facingHitbox)
+            {
+                print("Perfect blocked");
+                SoundFXManager.instance.PlaySoundFXClip(perfectBlockSound, transform, 1f);
+            }
+            else if (isBlocking && facingHitbox)
             {
                 print("Blocked");
+                SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, 1f);
+                var newHealth = healthScript.health - (damageTaken / 2);
+                healthScript.SetHealth(newHealth);
             }
             else
             {
+                SoundFXManager.instance.PlaySoundFXClip(playerHurtSound, transform, 1f);
                 var newHealth = healthScript.health - damageTaken;
                 healthScript.SetHealth(newHealth);
                 print("Damage taken");
             }
-            
-        }
 
-        
+        }
     }
     
+
 
 
 }
