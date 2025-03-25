@@ -266,25 +266,39 @@ public class PlayerStates : MonoBehaviour
         {
             if (isPerfectBlocking && facingHitbox)
             {
-                print("Perfect blocked");
-                SoundFXManager.instance.PlaySoundFXClip(perfectBlockSound, transform, 1f);
+                SuccessfulPerfectBlock(damageTaken);
             }
             else if (isBlocking && facingHitbox)
             {
-                print("Blocked");
-                SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, 1f);
-                var newHealth = healthScript.health - (damageTaken / 2);
-                healthScript.SetHealth(newHealth);
+                SuccessfulBlock(damageTaken);
             }
             else
             {
                 SoundFXManager.instance.PlaySoundFXClip(playerHurtSound, transform, 1f);
                 var newHealth = healthScript.health - damageTaken;
                 healthScript.SetHealth(newHealth);
+                healthScript.UpdateGreyHealthUI();
                 print("Damage taken");
             }
 
         }
+    }
+    public void SuccessfulPerfectBlock(float damageTaken)
+    {
+        print("Perfect blocked");
+        
+        SoundFXManager.instance.PlaySoundFXClip(perfectBlockSound, transform, 1f);
+    }
+    public void SuccessfulBlock(float damageTaken)
+    {
+        print("Blocked");
+        
+        SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, 1f);
+
+        float newGreyHealth = healthScript.greyHealth + (damageTaken * 0.5f);
+        float newHealth = healthScript.health - (damageTaken * 0.5f);
+        healthScript.SetHealth(newHealth);
+        healthScript.SetGreyHealth(newGreyHealth);
     }
     
 
