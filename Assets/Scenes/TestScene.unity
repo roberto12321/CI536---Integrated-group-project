@@ -606,7 +606,7 @@ MonoBehaviour:
   lastState: 0
   isBlocking: 0
   isPerfectBlocking: 0
-  perfectBlockTime: 0.25
+  perfectBlockTime: 0.135
   attack: {fileID: 8761934139001452162, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   block: {fileID: 5098899393317188295, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   dash: {fileID: 3069499282457050551, guid: 052faaac586de48259a63d0c4782560b, type: 3}
