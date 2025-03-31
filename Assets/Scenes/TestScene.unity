@@ -535,6 +535,8 @@ MonoBehaviour:
   gravity: -1.01
   gravityMultiplier: 1.2
   speed: 12
+  direction: {x: 0, y: 0, z: 0}
+  isDashing: 0
   turnSmoothTime: 0.05
   move: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!143 &113765915
@@ -600,13 +602,17 @@ MonoBehaviour:
   cam: {fileID: 1411083509}
   perfectBlockSound: {fileID: 8300000, guid: eefb0c01c6b6bd048b64b1518c01e96f, type: 3}
   blockSound: {fileID: 8300000, guid: 8db681ca45e055a41bddd0ec7c197bfb, type: 3}
+  dashSound: {fileID: 8300000, guid: 64b0a2b95daf7804fa2446394b8256b1, type: 3}
+  dashSuccessSound: {fileID: 8300000, guid: 27349ed1b09dd1f4d9980413971bc172, type: 3}
   playerHurtSound: {fileID: 8300000, guid: 9d86bc679041eb246b02a7eb9a08a899, type: 3}
   initialState: 0
   currentState: 0
   lastState: 0
   isBlocking: 0
   isPerfectBlocking: 0
+  isDashing: 0
   perfectBlockTime: 0.135
+  greyHealthHealingRate: 20
   attack: {fileID: 8761934139001452162, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   block: {fileID: 5098899393317188295, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   dash: {fileID: 3069499282457050551, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -646,6 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entitiesHit: []
   entity: {fileID: 113765911}
+  playerScript: {fileID: 113765918}
 --- !u!1 &167096278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entitiesHit: []
   entity: {fileID: 919030059}
+  playerScript: {fileID: 0}
 --- !u!1 &1015297513
 GameObject:
   m_ObjectHideFlags: 0

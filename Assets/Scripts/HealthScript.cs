@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HealthScript : MonoBehaviour
 {
@@ -33,34 +34,14 @@ public class HealthScript : MonoBehaviour
 
     public void SetHealth(float newHealth)
     {
-        if(newHealth > maxHealth)
-        {
-            health = maxHealth;
-        }
-        else if(newHealth < 0) 
-        {
-            health = 0;
-        }
-        else
-        {
-            health = newHealth;
-        }
+        
+        health = Mathf.Clamp(newHealth, 0, maxHealth);
+        
         healthBar.value = health;
     }
     public void SetGreyHealth(float newGreyHealth)
     {
-        if(newGreyHealth > maxHealth - health)
-        {
-            greyHealth = maxHealth - health;
-        }
-        else if(newGreyHealth < 0)
-        {
-            greyHealth = 0;
-        }
-        else
-        {
-            greyHealth = newGreyHealth;
-        }
+        greyHealth = Mathf.Clamp(newGreyHealth, 0, maxHealth - health);
         UpdateGreyHealthUI();
     }
 

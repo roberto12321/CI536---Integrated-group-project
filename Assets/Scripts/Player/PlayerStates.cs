@@ -6,30 +6,47 @@ using UnityEngine.InputSystem;
 
 public class PlayerStates : MonoBehaviour
 {
+    [Header("Components")]
+   
     private Animator animator;
     private PlayerMovement playerMovement;
     private HealthScript healthScript;
     private HitboxManagerScript hitboxManagerScript;
+
+    [Header("Components")]
+
     public GameObject player;
     public Transform cam;
 
+    [Header("Audio")]
+
     [SerializeField] private AudioClip perfectBlockSound;
     [SerializeField] private AudioClip blockSound;
+    [SerializeField] private AudioClip dashSound;
+    [SerializeField] private AudioClip dashSuccessSound;
     [SerializeField] private AudioClip playerHurtSound;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Music")]
 
     public int initialState;
+
     [HideInInspector] public PlayerState currentState;
     [HideInInspector] public PlayerState lastState;
-
+    
     //Combat
-    public bool isBlocking;
-    public bool isPerfectBlocking;
+    [HideInInspector] public bool isBlocking;
+    [HideInInspector] public bool isPerfectBlocking;
+    [HideInInspector] public bool isDashing;
+
+    [Header("Combat Stats")]
+
     public float perfectBlockTime;
+    public float greyHealthHealingRate;
+
     private float blockStartTime;
 
+
+    [Header("Actions")]
 
     public InputActionReference attack;
     public InputActionReference block;
@@ -75,6 +92,10 @@ public class PlayerStates : MonoBehaviour
                 StateChange(PlayerState.Block);
 
             }
+            if(dash.action.IsPressed() && playerMovement.direction.magnitude >= 0.1f && currentState != PlayerState.Dash)
+            {
+                StateChange(PlayerState.Dash);
+            }
         }
         if (currentState == PlayerState.Attack)
         {
@@ -96,7 +117,7 @@ public class PlayerStates : MonoBehaviour
         }
         if (currentState == PlayerState.Dash)
         {
-
+           
         }
         if (currentState == PlayerState.Swap)
         {
@@ -191,6 +212,13 @@ public class PlayerStates : MonoBehaviour
         if (enteredState == PlayerState.Dash)
         {
             print("Entered Dash");
+            playerMovement.canMove = false;
+            playerMovement.isDashing = true;
+            isDashing = true;
+            animator.SetInteger("Animation", 3);
+            SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+            playerMovement.SetDashDirection();
+
         }
         if (enteredState == PlayerState.Swap)
         {
@@ -231,6 +259,9 @@ public class PlayerStates : MonoBehaviour
         if (exitedState == PlayerState.Dash)
         {
             print("Exited Dash");
+            playerMovement.canMove = true;
+            playerMovement.isDashing = false;
+            isDashing = false;
         }
         if (exitedState == PlayerState.Swap)
         {
@@ -257,6 +288,10 @@ public class PlayerStates : MonoBehaviour
         {
             StateChange(PlayerState.Idle);
         }
+        if (currentState == PlayerState.Dash)
+        {
+            StateChange(PlayerState.Idle);
+        }
     }
 
     public void TakeDamage(float damageTaken, HitboxType hitboxType, bool facingHitbox)
@@ -271,6 +306,11 @@ public class PlayerStates : MonoBehaviour
             else if (isBlocking && facingHitbox)
             {
                 SuccessfulBlock(damageTaken);
+            }
+            else if(isDashing)
+            {
+                print("EZDODGELOL");
+                SoundFXManager.instance.PlaySoundFXClip(dashSuccessSound, transform, 1f);
             }
             else
             {
@@ -300,8 +340,4 @@ public class PlayerStates : MonoBehaviour
         healthScript.SetHealth(newHealth);
         healthScript.SetGreyHealth(newGreyHealth);
     }
-    
-
-
-
 }
