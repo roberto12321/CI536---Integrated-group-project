@@ -82,6 +82,15 @@ public class PlayerStates : MonoBehaviour
     {
         if (currentState == PlayerState.Idle)
         {
+            if(playerMovement.isMoving)
+            {
+                animator.SetInteger("Animation", 4);
+            }
+            else
+            {
+                animator.SetInteger("Animation", 0);
+            }
+
             if (attack.action.WasPressedThisFrame() && currentState != PlayerState.Attack)
             {
                 StateChange(PlayerState.Attack);

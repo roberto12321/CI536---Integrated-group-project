@@ -532,6 +532,7 @@ MonoBehaviour:
   controller: {fileID: 113765915}
   cam: {fileID: 1411083509}
   canMove: 0
+  isMoving: 0
   gravity: -1.01
   gravityMultiplier: 1.2
   speed: 12
@@ -934,10 +935,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.2, y: 2, z: 2}
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!23 &509726210
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1429,11 +1430,10 @@ GameObject:
   m_Component:
   - component: {fileID: 919030061}
   - component: {fileID: 919030060}
-  - component: {fileID: 919030063}
-  - component: {fileID: 919030062}
   - component: {fileID: 919030064}
   - component: {fileID: 919030065}
   - component: {fileID: 919030066}
+  - component: {fileID: 919030067}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: EnemyHurtbox
@@ -1480,54 +1480,6 @@ Transform:
   - {fileID: 514409169}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &919030062
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919030059}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!65 &919030063
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919030059}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.5, y: 5, z: 0.8}
-  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &919030064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1558,6 +1510,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eb3b8c591d20f64994e4fc1dee102bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHurtSound: {fileID: 8300000, guid: 9d86bc679041eb246b02a7eb9a08a899, type: 3}
+  player: {fileID: 113765911}
+  controller: {fileID: 919030067}
+  gravity: -9.81
+  gravityMultiplier: 3
+  speed: 6
+  turnSmoothTime: 0.1
 --- !u!114 &919030066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1532,31 @@ MonoBehaviour:
   entitiesHit: []
   entity: {fileID: 919030059}
   playerScript: {fileID: 0}
+--- !u!143 &919030067
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919030059}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 5
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &1015297513
 GameObject:
   m_ObjectHideFlags: 0
