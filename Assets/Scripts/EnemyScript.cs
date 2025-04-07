@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     private EnemyState lastState;
     public GameObject player;
     public CharacterController controller;
+    private Animator animator;
 
 
     public float gravity = -9.81f;
@@ -22,6 +23,9 @@ public class EnemyScript : MonoBehaviour
     public float turnSmoothTime = 0.1f;
 
     float turnSmoothVelocity;
+    public float chaseDistance;
+    public float attackDistance;
+    bool attacking = false;
 
     public enum EnemyState
     {
@@ -32,24 +36,40 @@ public class EnemyScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        animator = GetComponent<Animator>();
         healthScript = GetComponent<HealthScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ChasePlayer();
+        float distance = Vector3.Distance(player.transform.position, transform.position);
         if (currentState == EnemyState.Idle)
         {
+            if (distance < chaseDistance)
+            {
+                StateChange(EnemyState.Chase);
+            }
 
         }
         if (currentState == EnemyState.Attack)
         {
-
+            if (distance > attackDistance && !attacking)
+            {
+                StateChange(EnemyState.Chase);
+            }
         }
         if (currentState == EnemyState.Chase)
         {
-
+            if(distance > chaseDistance)
+            {
+                StateChange(EnemyState.Idle);
+            }
+            if(distance < attackDistance)
+            {
+                StateChange(EnemyState.Attack);
+            }
+            ChasePlayer();
         }
     }
 
@@ -76,12 +96,17 @@ public class EnemyScript : MonoBehaviour
     {
         if (enteredState == EnemyState.Idle)
         {
+            animator.SetInteger("Animation", 0);
         }
         if (enteredState == EnemyState.Attack)
         {
+            animator.SetInteger("Animation", 2);
+            attacking = true;
         }
         if (enteredState == EnemyState.Chase)
         {
+           
+            animator.SetInteger("Animation", 1);
         }
 
     }
@@ -102,7 +127,7 @@ public class EnemyScript : MonoBehaviour
     private void ChasePlayer()
     {
         Vector3 direction = (player.transform.position - transform.position);
-        direction.y = 0f; // Only rotate on Y axis
+        direction.y = 0f; 
         direction = direction.normalized;
 
         // Reset moveDirection
@@ -111,16 +136,14 @@ public class EnemyScript : MonoBehaviour
         // Apply gravity
         moveDirection += new Vector3(0, ApplyGravity(), 0);
 
-        if (direction.magnitude >= 0.1f) // Only rotate/move if player is not directly on top
+        if (direction.magnitude >= 0.1f) 
         {
-            // Calculate rotation
+            
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
-            // Rotate towards player
+           
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            // Move towards player
             moveDirection += (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward) * speed * Time.deltaTime;
         }
 
@@ -143,6 +166,10 @@ public class EnemyScript : MonoBehaviour
         }
         return velocity;
 
+    }
+    private void AttackEnd()
+    {
+        attacking = false;
     }
 }
 
