@@ -14,29 +14,33 @@ public class EnemyScript : MonoBehaviour
     public GameObject player;
     public CharacterController controller;
     private Animator animator;
+    private HitboxManagerScript hitboxManagerScript;
 
-
+    public string enemyTag;
     public float gravity = -9.81f;
     public float gravityMultiplier = 3.0f;
     private float velocity;
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
+    public float rotationSpeed;
 
     float turnSmoothVelocity;
     public float chaseDistance;
     public float attackDistance;
     bool attacking = false;
-
+    private bool facingPlayer;
     public enum EnemyState
     {
         Idle,
         Attack,
         Chase,
+        Rotating,
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         animator = GetComponent<Animator>();
+        hitboxManagerScript = GetComponent<HitboxManagerScript>();
         healthScript = GetComponent<HealthScript>();
     }
 
@@ -58,6 +62,23 @@ public class EnemyScript : MonoBehaviour
             {
                 StateChange(EnemyState.Chase);
             }
+            if(!facingPlayer && distance < attackDistance && !attacking)
+            {
+                StateChange(EnemyState.Rotating);
+            }
+        }
+        if (currentState == EnemyState.Rotating)
+        {
+            if (distance > attackDistance && !attacking)
+            {
+                StateChange(EnemyState.Chase);
+            }
+            if (facingPlayer && distance < attackDistance)
+            {
+                StateChange(EnemyState.Attack);
+            }
+            RotateTowardsPlayer();
+            
         }
         if (currentState == EnemyState.Chase)
         {
@@ -70,6 +91,14 @@ public class EnemyScript : MonoBehaviour
                 StateChange(EnemyState.Attack);
             }
             ChasePlayer();
+        }
+        //Have this so gravity always affects the enemy
+        Gravity();
+
+        //Health
+        if (healthScript.health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -98,6 +127,10 @@ public class EnemyScript : MonoBehaviour
         {
             animator.SetInteger("Animation", 0);
         }
+        if (enteredState == EnemyState.Rotating)
+        {
+            animator.SetInteger("Animation", 0);
+        }
         if (enteredState == EnemyState.Attack)
         {
             animator.SetInteger("Animation", 2);
@@ -118,8 +151,10 @@ public class EnemyScript : MonoBehaviour
         }
         if (exitedState == EnemyState.Attack)
         {
+            print("Hitboxes disabled");
+            hitboxManagerScript.DisableAllHitboxes();
         }
-        if (exitedState == EnemyState.Chase)
+        if (exitedState == EnemyState.Chase);
         {
         }
 
@@ -133,8 +168,7 @@ public class EnemyScript : MonoBehaviour
         // Reset moveDirection
         Vector3 moveDirection = Vector3.zero;
 
-        // Apply gravity
-        moveDirection += new Vector3(0, ApplyGravity(), 0);
+       
 
         if (direction.magnitude >= 0.1f) 
         {
@@ -144,11 +178,32 @@ public class EnemyScript : MonoBehaviour
 
            
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            moveDirection += (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward) * speed * Time.deltaTime;
+            moveDirection += (Quaternion.Euler(0f, angle, 0f) * Vector3.forward) * speed * Time.deltaTime;
         }
 
         // Move enemy
         controller.Move(moveDirection);
+    }
+    private void RotateTowardsPlayer()
+    {
+        Vector3 direction = (player.transform.position - transform.position);
+        direction.y = 0f;
+        direction = direction.normalized;
+
+        // Reset moveDirection
+        Vector3 moveDirection = Vector3.zero;
+
+    
+        
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle, rotationSpeed * Time.deltaTime);
+
+
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            
+        
+
+     
     }
     private float ApplyGravity()
     {
@@ -167,9 +222,35 @@ public class EnemyScript : MonoBehaviour
         return velocity;
 
     }
+    private void Gravity()
+    {
+        // Reset moveDirection
+        Vector3 moveDirection = Vector3.zero;
+
+        // Apply gravity
+        moveDirection += new Vector3(0, ApplyGravity(), 0);
+        controller.Move(moveDirection);
+    }
     private void AttackEnd()
     {
         attacking = false;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(enemyTag))
+        {
+            facingPlayer = true;
+            
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag(enemyTag))
+        {
+            facingPlayer = false;
+
+        }
     }
 }
 

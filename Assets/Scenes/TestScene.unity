@@ -612,7 +612,7 @@ MonoBehaviour:
   isBlocking: 0
   isPerfectBlocking: 0
   isDashing: 0
-  perfectBlockTime: 0.135
+  perfectBlockTime: 0.2
   greyHealthHealingRate: 20
   attack: {fileID: 8761934139001452162, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   block: {fileID: 5098899393317188295, guid: 052faaac586de48259a63d0c4782560b, type: 3}
@@ -652,6 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesHit: []
+  hitboxes: {fileID: 0}
   entity: {fileID: 113765911}
   playerScript: {fileID: 113765918}
 --- !u!1 &167096278
@@ -1434,6 +1435,7 @@ GameObject:
   - component: {fileID: 919030065}
   - component: {fileID: 919030066}
   - component: {fileID: 919030067}
+  - component: {fileID: 919030068}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: EnemyHurtbox
@@ -1495,7 +1497,7 @@ MonoBehaviour:
   health: 0
   isAlive: 1
   greyHealth: 0
-  maxHealth: 100
+  maxHealth: 25
   healthBar: {fileID: 167096280}
   greyHealthBar: {fileID: 0}
 --- !u!114 &919030065
@@ -1513,10 +1515,12 @@ MonoBehaviour:
   enemyHurtSound: {fileID: 8300000, guid: 9d86bc679041eb246b02a7eb9a08a899, type: 3}
   player: {fileID: 113765911}
   controller: {fileID: 919030067}
+  enemyTag: PlayerHurtbox
   gravity: -9.81
   gravityMultiplier: 3
   speed: 6
-  turnSmoothTime: 0.1
+  turnSmoothTime: 0.25
+  rotationSpeed: 400
   chaseDistance: 25
   attackDistance: 4
 --- !u!114 &919030066
@@ -1532,6 +1536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entitiesHit: []
+  hitboxes: {fileID: 509726209}
   entity: {fileID: 919030059}
   playerScript: {fileID: 0}
 --- !u!143 &919030067
@@ -1559,6 +1564,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!65 &919030068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919030059}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05, y: 4.18, z: 5.2565536}
+  m_Center: {x: 0, y: 2.5391095, z: 2.84}
 --- !u!1001 &935084339
 PrefabInstance:
   m_ObjectHideFlags: 0

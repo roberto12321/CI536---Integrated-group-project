@@ -5,6 +5,8 @@ using static UnityEngine.Rendering.DebugUI;
 public class HitboxManagerScript : MonoBehaviour
 {
     public List<Collider> entitiesHit = new List<Collider>();
+    [SerializeField] private BoxCollider hitboxes;
+
     public GameObject entity;
     private HealthScript healthScript;
     public PlayerStates playerScript;
@@ -40,6 +42,13 @@ public class HitboxManagerScript : MonoBehaviour
             healthScript.SetGreyHealth(newGreyHealth);
         }
     }
-    
+   
+    public void DisableAllHitboxes()
+    {
+        
+        hitboxes.enabled = false;
+        
+    }
+
 
 }
