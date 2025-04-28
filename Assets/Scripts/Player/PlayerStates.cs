@@ -225,6 +225,7 @@ public class PlayerStates : MonoBehaviour
             playerMovement.isDashing = true;
             isDashing = true;
             animator.SetInteger("Animation", 3);
+
             SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
             playerMovement.SetDashDirection();
 
@@ -300,6 +301,16 @@ public class PlayerStates : MonoBehaviour
         if (currentState == PlayerState.Dash)
         {
             StateChange(PlayerState.Idle);
+        }
+    }
+    public void AnimationEvent1()
+    {
+
+        if (currentState == PlayerState.Dash)
+        {
+            playerMovement.canMove = true;
+            playerMovement.isDashing = false;
+            isDashing = false;
         }
     }
 
