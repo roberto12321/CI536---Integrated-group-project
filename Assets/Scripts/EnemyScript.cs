@@ -154,7 +154,7 @@ public class EnemyScript : MonoBehaviour
             print("Hitboxes disabled");
             hitboxManagerScript.DisableAllHitboxes();
         }
-        if (exitedState == EnemyState.Chase);
+        if (exitedState == EnemyState.Chase)
         {
         }
 

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerStates : MonoBehaviour
 {
@@ -56,6 +58,10 @@ public class PlayerStates : MonoBehaviour
     public InputActionReference ability1;
     public InputActionReference ability2;
 
+    [Header("Misc")]
+    public bool keyFound;
+
+
     public enum PlayerState
     {
         Idle,
@@ -70,6 +76,7 @@ public class PlayerStates : MonoBehaviour
 
     void Start()
     {
+        keyFound = false;
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         healthScript = GetComponent<HealthScript>();
@@ -352,12 +359,26 @@ public class PlayerStates : MonoBehaviour
     public void SuccessfulBlock(float damageTaken)
     {
         print("Blocked");
-        
+
         SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, 1f);
 
         float newGreyHealth = healthScript.greyHealth + (damageTaken * 0.5f);
         float newHealth = healthScript.health - (damageTaken * 0.5f);
         healthScript.SetHealth(newHealth);
         healthScript.SetGreyHealth(newGreyHealth);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Key"))
+        {
+            Destroy(other.gameObject);
+            keyFound = true;
+        }
+        if (other.gameObject.CompareTag("WinZone") && keyFound)
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(currentSceneIndex + 1);
+
+        }
     }
 }
