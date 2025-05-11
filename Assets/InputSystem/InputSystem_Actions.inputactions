@@ -147,8 +147,8 @@
                 },
                 {
                     "name": "",
-                    "id": "d1236c8f-a4cf-48be-b430-f5667e6aefb8",
-                    "path": "<Gamepad>/leftTrigger",
+                    "id": "08550a35-c485-433b-92ba-b8111836e4e6",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",

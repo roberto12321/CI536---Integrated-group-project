@@ -27,6 +27,7 @@ public class PlayerStates : MonoBehaviour
     [SerializeField] private AudioClip dashSound;
     [SerializeField] private AudioClip dashSuccessSound;
     [SerializeField] private AudioClip playerHurtSound;
+    [SerializeField] private AudioClip pickUp;
 
     [Header("Music")]
 
@@ -60,6 +61,8 @@ public class PlayerStates : MonoBehaviour
 
     [Header("Misc")]
     public bool keyFound;
+    private bool attackCancel;
+    private bool continueCombo;
 
 
     public enum PlayerState
@@ -115,7 +118,11 @@ public class PlayerStates : MonoBehaviour
         }
         if (currentState == PlayerState.Attack)
         {
-            
+            if (attack.action.IsPressed() && attackCancel)
+            {
+                continueCombo = true;
+                animator.SetInteger("Attack", 2);
+            }
         }
         if (currentState == PlayerState.Block)
         {
@@ -220,7 +227,9 @@ public class PlayerStates : MonoBehaviour
             playerMovement.canMove = false;
             transform.rotation = Quaternion.Euler(0f, cam.eulerAngles.y, 0f);
             hitboxManagerScript.entitiesHit.Clear();
+            animator.SetInteger("Attack", 1);
             animator.SetInteger("Animation", 1);
+            
         }
         if (enteredState == PlayerState.Block)
         {
@@ -240,7 +249,7 @@ public class PlayerStates : MonoBehaviour
             isDashing = true;
             animator.SetInteger("Animation", 3);
 
-            SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
+            //SoundFXManager.instance.PlaySoundFXClip(dashSound, transform, 1f);
             playerMovement.SetDashDirection();
 
         }
@@ -307,15 +316,35 @@ public class PlayerStates : MonoBehaviour
 
     public void AnimationEnd()
     {
+        attackCancel = false;
 
-        if (currentState == PlayerState.Attack)
+        if (!continueCombo)
         {
-            StateChange(PlayerState.Idle);
+            if (currentState == PlayerState.Attack)
+            {
+                StateChange(PlayerState.Idle);
+            }
+            if (currentState == PlayerState.Dash)
+            {
+                StateChange(PlayerState.Idle);
+            }
         }
-        if (currentState == PlayerState.Dash)
-        {
-            StateChange(PlayerState.Idle);
-        }
+        continueCombo = false;
+        
+    }
+
+    public void AnimationEnd2()
+    {
+        StateChange(PlayerState.Idle);
+        attackCancel = false;
+        continueCombo = false;
+    }
+
+
+
+        public void AttackCancel()
+    {
+        attackCancel = true;
     }
     public void AnimationEvent1()
     {
@@ -381,6 +410,13 @@ public class PlayerStates : MonoBehaviour
             Destroy(other.gameObject);
             keyFound = true;
         }
+        if (other.gameObject.CompareTag("Heal"))
+        {
+            Destroy(other.gameObject);
+            Heal(25);
+            SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, 1f);
+
+        }
         if (other.gameObject.CompareTag("WinZone") && keyFound)
         {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -388,4 +424,15 @@ public class PlayerStates : MonoBehaviour
 
         }
     }
+    private void Heal(float damageHealed)
+    {
+        var newHealth = healthScript.health + damageHealed;
+        healthScript.SetHealth(newHealth);
+        if(healthScript.greyHealth + healthScript.health > healthScript.maxHealth)
+        {
+            float newGreyHealth = healthScript.maxHealth - healthScript.greyHealth;
+            healthScript.SetGreyHealth(newGreyHealth);
+        }
+    }
+
 }

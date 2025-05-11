@@ -10,6 +10,8 @@ TagManager:
   - EnemyHurtbox
   - Key
   - WinZone
+  - Heal
+  - Coin
   layers:
   - Default
   - TransparentFX
