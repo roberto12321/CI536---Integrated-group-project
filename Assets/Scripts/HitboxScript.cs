@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -21,18 +22,33 @@ public class HitboxScript : MonoBehaviour
     {
 
     }
+    private void OnTriggerStay(Collider other)
+    {
+
+        HitDetection(other);
+    }
     private void OnTriggerEnter(Collider other)
+    {
+
+        HitDetection(other);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+
+        HitDetection(other);
+    }
+    private void HitDetection(Collider other)
     {
         if (other.gameObject.CompareTag(enemyTag) && !hitboxManagerScript.entitiesHit.Contains(other))
         {
             hitboxManagerScript.entitiesHit.Add(other);
-            if(enemyTag == "PlayerHurtbox")
+            if (enemyTag == "PlayerHurtbox")
             {
                 print("Player hit");
                 PlayerStates playerScript = other.gameObject.GetComponent<PlayerStates>();
                 GameObject playerObject = playerScript.player;
 
-                Vector3 blockDirection = playerObject.transform.forward; 
+                Vector3 blockDirection = playerObject.transform.forward;
                 Vector3 direction = (hitboxManagerScript.entity.transform.position - playerObject.transform.position).normalized;
                 float dotProduct = Vector3.Dot(direction, blockDirection);
                 bool facingHitbox;
@@ -64,7 +80,6 @@ public class HitboxScript : MonoBehaviour
             //healthScript.SetHealth(newHealth);
             //print(healthScript.health);
         }
-        
     }
 }
 

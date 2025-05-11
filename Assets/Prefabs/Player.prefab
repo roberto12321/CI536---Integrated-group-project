@@ -37,6 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3353548014088859641}
+  - {fileID: 9189986744407334267}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &5672968446286911045
@@ -173,6 +174,7 @@ MonoBehaviour:
   heal: {fileID: -4913038205513180125, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   ability1: {fileID: -1659599974407356073, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   ability2: {fileID: -7793274223562163506, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  keyFound: 0
 --- !u!114 &7171972732919485749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +316,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.2, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4060496736504113676
 MonoBehaviour:
@@ -333,6 +335,37 @@ MonoBehaviour:
   healthScript: {fileID: 0}
   hitboxDamage: 10
   hitboxType: 0
+--- !u!1 &9217781583877588353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9189986744407334267}
+  m_Layer: 0
+  m_Name: Camera Focus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9189986744407334267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9217781583877588353}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4156227450139850429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2954514582175402002
 PrefabInstance:
   m_ObjectHideFlags: 0

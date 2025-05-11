@@ -76,7 +76,7 @@ public class PlayerStates : MonoBehaviour
 
     void Start()
     {
-        keyFound = false;
+        
         animator = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         healthScript = GetComponent<HealthScript>();
@@ -150,6 +150,13 @@ public class PlayerStates : MonoBehaviour
         if (currentState == PlayerState.Ability2)
         {
 
+        }
+        //Health
+        if (healthScript.health <= 0)
+        {
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
         }
 
     }

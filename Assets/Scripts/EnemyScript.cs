@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using static UnityEditorInternal.VersionControl.ListControl;
 
 public class EnemyScript : MonoBehaviour
@@ -29,6 +30,7 @@ public class EnemyScript : MonoBehaviour
     public float attackDistance;
     bool attacking = false;
     private bool facingPlayer;
+    public bool pseudoBoss;
     public enum EnemyState
     {
         Idle,
@@ -99,6 +101,12 @@ public class EnemyScript : MonoBehaviour
         if (healthScript.health <= 0)
         {
             Destroy(gameObject);
+            if (pseudoBoss)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 
