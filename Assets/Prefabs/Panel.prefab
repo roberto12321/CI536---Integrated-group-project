@@ -153,17 +153,17 @@ MonoBehaviour:
     Space - Dash
 
 
-    XBOX
+    Controller
 
 
     L
     Joystick - Move
 
-    RB - Attack
+    RB/R1 - Attack
 
-    LB - Block
+    LB/L1 - Block
 
-    B - Dash
+    B/O - Dash
 
 
 
