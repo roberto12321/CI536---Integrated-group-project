@@ -18,6 +18,10 @@ public class Button : MonoBehaviour
     public void ChangeScene(int scene)
     {
         SceneManager.LoadScene(scene);
+        print("Current coins" + SoundFXManager.coins); 
+        SoundFXManager.coins = 0;
+        SoundFXManager.coinCollected = false;
+        print("Current coins" + SoundFXManager.coins);
     }
     public void QuitGame()
     {

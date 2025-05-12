@@ -1,9 +1,17 @@
 using UnityEngine;
+using TMPro;
+
+
 
 public class SoundFXManager : MonoBehaviour
-{ 
+{
 
+    public static int soundVolume;
+    public static int coins;
+    public static bool coinCollected;
 
+    public bool winScreen;
+    public TextMeshProUGUI coinText;
     public static SoundFXManager instance;
     [SerializeField] private AudioSource soundObject;
 
@@ -13,6 +21,10 @@ public class SoundFXManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+        }
+        if (winScreen)
+        {
+            coinText.text = "You win! \n" + coins.ToString() + "/3 coins found!";
         }
     }
 

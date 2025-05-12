@@ -63,8 +63,7 @@ public class PlayerStates : MonoBehaviour
     public bool keyFound;
     private bool attackCancel;
     private bool continueCombo;
-
-
+    
     public enum PlayerState
     {
         Idle,
@@ -417,10 +416,25 @@ public class PlayerStates : MonoBehaviour
             SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, 1f);
 
         }
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            if(!SoundFXManager.coinCollected)
+            {
+                SoundFXManager.coins++;
+                SoundFXManager.coinCollected = true;
+                SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, 1f);
+            }
+            
+
+        }
         if (other.gameObject.CompareTag("WinZone") && keyFound)
         {
+            SoundFXManager.coinCollected = false;
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(currentSceneIndex + 1);
+            
+
 
         }
     }

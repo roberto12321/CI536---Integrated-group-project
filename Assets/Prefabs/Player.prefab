@@ -154,11 +154,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5430430182676034897}
   cam: {fileID: 0}
-  perfectBlockSound: {fileID: 8300000, guid: eefb0c01c6b6bd048b64b1518c01e96f, type: 3}
-  blockSound: {fileID: 8300000, guid: 8db681ca45e055a41bddd0ec7c197bfb, type: 3}
-  dashSound: {fileID: 8300000, guid: 64b0a2b95daf7804fa2446394b8256b1, type: 3}
-  dashSuccessSound: {fileID: 8300000, guid: 27349ed1b09dd1f4d9980413971bc172, type: 3}
-  playerHurtSound: {fileID: 8300000, guid: 9d86bc679041eb246b02a7eb9a08a899, type: 3}
+  perfectBlockSound: {fileID: 8300000, guid: bc8a1226b8db345408ab94c77d947fa3, type: 3}
+  blockSound: {fileID: 8300000, guid: a63fa73e26b9ddd42a68dee1160af471, type: 3}
+  dashSound: {fileID: 8300000, guid: 94c33e915c313b846b1cb397e168bbdd, type: 3}
+  dashSuccessSound: {fileID: 8300000, guid: 94c33e915c313b846b1cb397e168bbdd, type: 3}
+  playerHurtSound: {fileID: 8300000, guid: 71f276a44b6b30b47aacce2358fe0730, type: 3}
   pickUp: {fileID: 8300000, guid: 60140f0c344edee44b2e032200f904f1, type: 3}
   initialState: 0
   currentState: 0
