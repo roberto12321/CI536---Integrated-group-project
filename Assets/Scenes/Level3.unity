@@ -524,6 +524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MedKit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9014552144106541413, guid: 1a4f3ad663af90748a41d1fca647484c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2964,6 +2968,10 @@ PrefabInstance:
     - target: {fileID: 4804866898779421771, guid: 1a4f3ad663af90748a41d1fca647484c, type: 3}
       propertyPath: m_Name
       value: MedKit (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014552144106541413, guid: 1a4f3ad663af90748a41d1fca647484c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
