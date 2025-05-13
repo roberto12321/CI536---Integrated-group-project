@@ -58,7 +58,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Boss_Slam_Attack
-  m_Speed: 3.5
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 812650812720144740}
@@ -119,7 +119,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Boss_Poke_Attack
-  m_Speed: 2.5
+  m_Speed: 2.75
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8470499764968955113}

@@ -372,11 +372,11 @@ public class PlayerStates : MonoBehaviour
             else if(isDashing)
             {
                 print("EZDODGELOL");
-                SoundFXManager.instance.PlaySoundFXClip(dashSuccessSound, transform, 1f);
+                SoundFXManager.instance.PlaySoundFXClip(dashSuccessSound, transform, SoundFXManager.soundVolume);
             }
             else
             {
-                SoundFXManager.instance.PlaySoundFXClip(playerHurtSound, transform, 1f);
+                SoundFXManager.instance.PlaySoundFXClip(playerHurtSound, transform, SoundFXManager.soundVolume);
                 var newHealth = healthScript.health - damageTaken;
                 healthScript.SetHealth(newHealth);
                 healthScript.UpdateGreyHealthUI();
@@ -388,14 +388,14 @@ public class PlayerStates : MonoBehaviour
     public void SuccessfulPerfectBlock(float damageTaken)
     {
         print("Perfect blocked");
-        
-        SoundFXManager.instance.PlaySoundFXClip(perfectBlockSound, transform, 1f);
+
+        SoundFXManager.instance.PlaySoundFXClip(perfectBlockSound, transform, SoundFXManager.soundVolume) ;
     }
     public void SuccessfulBlock(float damageTaken)
     {
         print("Blocked");
 
-        SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(blockSound, transform, SoundFXManager.soundVolume);
 
         float newGreyHealth = healthScript.greyHealth + (damageTaken * 0.5f);
         float newHealth = healthScript.health - (damageTaken * 0.5f);
@@ -413,7 +413,7 @@ public class PlayerStates : MonoBehaviour
         {
             Destroy(other.gameObject);
             Heal(25);
-            SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, 1f);
+            SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, SoundFXManager.soundVolume);
 
         }
         if (other.gameObject.CompareTag("Coin"))
@@ -423,7 +423,7 @@ public class PlayerStates : MonoBehaviour
             {
                 SoundFXManager.coins++;
                 SoundFXManager.coinCollected = true;
-                SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, 1f);
+                SoundFXManager.instance.PlaySoundFXClip(pickUp, transform, SoundFXManager.soundVolume);
             }
             
 

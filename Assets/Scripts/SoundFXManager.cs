@@ -1,15 +1,15 @@
 using UnityEngine;
 using TMPro;
-
-
+using UnityEngine.UI;
 
 public class SoundFXManager : MonoBehaviour
 {
 
-    public static int soundVolume;
+    public static float soundVolume = 0.1f;
     public static int coins;
     public static bool coinCollected;
-
+    public AudioSource music;
+    public Slider slider;
     public bool winScreen;
     public TextMeshProUGUI coinText;
     public static SoundFXManager instance;
@@ -18,6 +18,7 @@ public class SoundFXManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        music.volume = soundVolume;
         if (instance == null)
         {
             instance = this;
@@ -45,4 +46,10 @@ public class SoundFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
 
     }
+    public void SliderChange()
+    {
+        soundVolume = slider.value;
+        print("Sound volume: " + soundVolume);
+    }
+
 }

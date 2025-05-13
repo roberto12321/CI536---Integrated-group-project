@@ -119,7 +119,7 @@ public class BossScript : MonoBehaviour
     {
         //SoundFXManager.instance.PlaySoundFXClip(playerHurtSound, transform, 1f);
         var newHealth = healthScript.health - damageTaken;
-        SoundFXManager.instance.PlaySoundFXClip(enemyHurtSound, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXClip(enemyHurtSound, transform, SoundFXManager.soundVolume);
         healthScript.SetHealth(newHealth);
         print("Damage taken");
 

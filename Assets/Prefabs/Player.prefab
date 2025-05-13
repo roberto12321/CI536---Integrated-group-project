@@ -159,7 +159,7 @@ MonoBehaviour:
   dashSound: {fileID: 8300000, guid: 94c33e915c313b846b1cb397e168bbdd, type: 3}
   dashSuccessSound: {fileID: 8300000, guid: 94c33e915c313b846b1cb397e168bbdd, type: 3}
   playerHurtSound: {fileID: 8300000, guid: 71f276a44b6b30b47aacce2358fe0730, type: 3}
-  pickUp: {fileID: 8300000, guid: 60140f0c344edee44b2e032200f904f1, type: 3}
+  pickUp: {fileID: 8300000, guid: daf0834dc97a32e40be8ef2cfadc3c01, type: 3}
   initialState: 0
   currentState: 0
   lastState: 0
