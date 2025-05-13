@@ -64,7 +64,13 @@ public class BossScript : MonoBehaviour
             {
                 StateChange(EnemyState.Chase);
             }
-            if(!facingPlayer && distance < attackDistance && !attacking)
+            if (distance < attackDistance && !attacking)
+            {
+                int randomAttack = Random.Range(2, 4);
+                animator.SetInteger("Animation", randomAttack);
+                attacking = true;
+            }
+            if (!facingPlayer && distance < attackDistance && !attacking)
             {
                 StateChange(EnemyState.Rotating);
             }
