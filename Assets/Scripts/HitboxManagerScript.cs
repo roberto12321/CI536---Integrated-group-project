@@ -45,8 +45,9 @@ public class HitboxManagerScript : MonoBehaviour
    
     public void DisableAllHitboxes()
     {
-        
-        hitboxes.enabled = false;
+
+        //hitboxes.enabled = false;
+        print("Obselete");
         
     }
 

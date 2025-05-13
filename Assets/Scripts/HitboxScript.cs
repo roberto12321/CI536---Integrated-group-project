@@ -72,7 +72,15 @@ public class HitboxScript : MonoBehaviour
             {
                 print("Enemy hit");
                 EnemyScript enemyScript = other.gameObject.GetComponent<EnemyScript>();
-                enemyScript.TakeDamage(hitboxDamage);
+                BossScript bossScript = other.gameObject.GetComponent<BossScript>();
+                if (enemyScript != null)
+                {
+                    enemyScript.TakeDamage(hitboxDamage);
+                }
+                else if (bossScript != null)
+                {
+                    bossScript.TakeDamage(hitboxDamage);
+                }
                 hitboxManagerScript.EnemyHit(hitboxDamage);
             }
             //healthScript = other.GetComponent<HealthScript>();
